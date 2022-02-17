@@ -44,9 +44,7 @@ Employee.prototype.getSalary = function() {
         }
        let totalSalary = Math.random() * (max - min) + min; 
         this.salary = totalSalary - totalSalary * 0.075;
-        } 
-
-        
+         }        
 
 function generatId(){
     return id++ ;
