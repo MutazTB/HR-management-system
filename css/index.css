@@ -9,6 +9,9 @@ header {
         padding-right: 90px;
        
     }
+    header img {
+        padding-left: 5px;
+    }
     a {
         margin: auto;
         float: right;
