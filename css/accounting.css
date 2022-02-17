@@ -4,6 +4,9 @@ header {
     align-items: center;
     /* justify-content: space-between; */
     }
+    header img {
+        padding-left: 5px;
+    }
     nav {
         margin: auto;
         padding-right: 90px;       
