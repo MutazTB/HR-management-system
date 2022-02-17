@@ -46,6 +46,8 @@ Employee.prototype.getSalary = function() {
         this.salary = totalSalary - totalSalary * 0.075;
         } 
 
+        
+
 function generatId(){
     return id++ ;
 }
