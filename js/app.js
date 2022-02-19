@@ -29,7 +29,7 @@ let hadiAhmad = new Employee("Hadi Ahmad" , "Finance" , "Mid-Senior" , "url" );
 Employee.prototype.getSalary = function() {
     var max ;
     var min ;
-       // console.log(employees[i].level);      
+             
         if(this.level == "Senior"){
              min = 1500 ;
              max = 2000 ;
@@ -44,7 +44,7 @@ Employee.prototype.getSalary = function() {
         }
        let totalSalary = Math.random() * (max - min) + min; 
         this.salary = totalSalary - totalSalary * 0.075;
-        } 
+         }        
 
 function generatId(){
     return id++ ;
