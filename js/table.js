@@ -23,38 +23,6 @@ let omarZaid = new Employee( "Omar Zaid" , "Development" , "Senior" , "url" );
 let ranaSaleh = new Employee("Rana Saleh" , "Administration" , "Junior" , "url" );
 let hadiAhmad = new Employee("Hadi Ahmad" , "Finance" , "Mid-Senior" , "url" );
 
-Employee.prototype.getSalary = function() {
-    var max ;
-    var min ;
-       // console.log(employees[i].level);      
-        if(this.level == "Senior"){
-             min = 1500 ;
-             max = 2000 ;
-        }
-        else if (this.level == "Mid-Senior"){
-             min = 1000 ;
-             max = 1500 ;
-        }
-        else {
-             min = 500 ;
-             max = 1000 ;
-        }
-       let totalSalary = Math.random() * (max - min) + min; 
-        this.salary = totalSalary - totalSalary * 0.075;
-        } 
-//         let administrationNum = 0 ;
-//         let developmentNum = 0 ;
-//         let financeNum = 0 ;
-//         let marketingNum = 0
-// for(let i = 0 ; i < employees.length ; i ++ ){
-// if(employees[i].department == "Administration"){}
-
-// else if(employees[i].department == "Marketing"){}
-// else if(employees[i].department == "Development"){}
-// else{}
-// }
-
-
 
 function renderHeader(){
     let tr = document.createElement("tr");
@@ -76,55 +44,184 @@ function renderHeader(){
     avrSalary.textContent = "Average";
     tr.appendChild(avrSalary);
 }
-let a = 0;
-for(let i = 0 ; i < employees[i].length ; i++){
-    if(employees[i].department == "Administration"){
-        a = 1 ;
-        
-    }
-    else if(employees[i].department == "Finance"){
-        a = 2 ;
-        
-    }
-    else if(employees[i].department == "Marketing"){
-       a = 3 ;
-        
-    }
-    else {
-        a = 4 ;       
-    }
-}
+
+Employee.prototype.getSalary = function() {
+    var max ;
+    var min ;
+             
+        if(this.level == "Senior"){
+             min = 1500 ;
+             max = 2000 ;
+        }
+        else if (this.level == "Mid-Senior"){
+             min = 1000 ;
+             max = 1500 ;
+        }
+        else {
+             min = 500 ;
+             max = 1000 ;
+        }
+       let totalSalary = Math.random() * (max - min) + min; 
+        this.salary = totalSalary - totalSalary * 0.075;
+         }
+
+        //  for( var i = 0 ; i < employees.length ; i++){     
+            //employees[i].getId();   
+        //     employees[i].getSalary();
+            //renderAll();
+        //     console.log(employees[i].getSalary());
+        // }
 
 
-Employee.prototype.renderTableBody = function(){
+        function renderBody(){
+            table.innerHTML = "";
+            renderHeader();
+            for(let i =0; i < employees.length; i++){
+                employees[i].getSalary();
+                console.log(employees[i].salary);
+            }   
+            renderTableBody()
+        }
+    let totalAdminSalary = 0 ;
+    let avgAdminSalary = 0 ;
+    let totalFinanceSalary = 0 ;
+    let avgFinanceSalary = 0 ;
+    let totalMarketingSalary = 0 ;
+    let avgMarketingSalary = 0 ;
+    let totalDevelopmentSalary = 0 ;
+    let avgDevelopmentSalary = 0 ;
+    let adminNum = 0 ;
+    let financeNum = 0 ;
+    let marketingNum = 0 ;
+    let developmentNum = 0 ;
+
     
-    let tr = document.createElement("tr");
-    table.appendChild(tr);
-
-    let departmentCell = document.createElement("td");    
-    departmentCell.textContent= a ;
-    tr.appendChild(departmentCell);
-
-    let numEmployeeCell = document.createElement("td");
-    numEmployeeCell.textContent= employees.length;
-    tr.appendChild(numEmployeeCell);
-
-    let totalSalaryCell = document.createElement("td");
-    totalSalaryCell.textContent = this.name;
-    tr.appendChild(totalSalaryCell);
-
-    let avgSalaryCell = document.createElement("td");
-    avgSalaryCell.textContent = this.name;
-    tr.appendChild(avgSalaryCell);
-};
-
-
-function renderBody(){
-    table.innerHTML = "";
-    renderHeader();
-    for(let i =0; i < employees.length; i++){
-        employees[i].renderTableBody();
+ function renderTableBody(){          
+    for(let i = 0 ; i < employees.length ; i++){
+        employees[i].getSalary();
+        console.log(employees[i].salary);
+        if(employees[i].department == "Administration"){
+            totalAdminSalary += employees[i].salary ;
+            adminNum += 1 ;            
+        }
+        else if(employees[i].department == "Finance"){
+            totalFinanceSalary += employees[i].salary ;
+            financeNum += 1 ;            
+        }
+        else if(employees[i].department == "Marketing"){
+            totalMarketingSalary += employees[i].salary ;
+            marketingNum += 1 ;            
+        }
+        else {
+            totalDevelopmentSalary += employees[i].salary ;
+            developmentNum += 1 ;                  
+        }
+         
     }
-}
+    let departmentCell = document.createElement("tr"); 
+    let administrationtdCell = document.createElement("td");   
+    administrationtdCell.textContent= "Administration" ;
+    departmentCell.appendChild(administrationtdCell);        
+    let numEmployeeCell = document.createElement("td");
+    numEmployeeCell.textContent= adminNum;
+    departmentCell.appendChild(numEmployeeCell);
+    table.appendChild(departmentCell); 
+    let sumSalary = totalAdminSalary + totalFinanceSalary + totalMarketingSalary + totalDevelopmentSalary ;    
 
+    // Finance
+    let financeCell = document.createElement("tr");    
+    let financetrCell = document.createElement("td");
+    financetrCell.textContent= "Finance";   
+    financeCell.appendChild(financetrCell);
+    let financetdCell = document.createElement("td");
+    financetdCell.textContent= financeNum;
+    financeCell.appendChild(financetdCell);
+    table.appendChild(financeCell);
+
+
+    // Marketing
+    let marketingCell = document.createElement("tr");
+    let marketingtrCell = document.createElement("td");    
+    marketingtrCell.textContent= "Marketing" ;
+    marketingCell.appendChild(marketingtrCell);
+    let marketingtdCell = document.createElement("td");
+    marketingtdCell.textContent= marketingNum;
+    marketingCell.appendChild(marketingtdCell);
+    table.appendChild(marketingCell);
+
+    //Devlopment
+    let developmentCell = document.createElement("tr"); 
+    let developmenttrCell = document.createElement("td");   
+    developmenttrCell.textContent= "Development" ;
+    developmentCell.appendChild(developmenttrCell);
+    let developmenttdCell = document.createElement("td");
+    developmenttdCell.textContent= developmentNum;
+    developmentCell.appendChild(developmenttdCell);
+    table.appendChild(developmentCell);
+
+
+    avgAdminSalary = totalAdminSalary/adminNum ;
+    avgFinanceSalary = totalFinanceSalary/financeNum ;
+    avgMarketingSalary = totalMarketingSalary/marketingNum ;
+    avgDevelopmentSalary = totalDevelopmentSalary/developmentNum ;
+    //Salary
+    let totalAdminSalaryCell = document.createElement("td");
+    totalAdminSalaryCell.textContent= totalAdminSalary;
+    departmentCell.appendChild(totalAdminSalaryCell);
+    //avg
+    let avgAdminSalaryCell = document.createElement("td");
+    avgAdminSalaryCell.textContent= avgAdminSalary;
+    departmentCell.appendChild(avgAdminSalaryCell);
+    //salary
+    let totalFinanceSalaryCell = document.createElement("td");
+    totalFinanceSalaryCell.textContent= totalFinanceSalary;
+    financeCell.appendChild(totalFinanceSalaryCell);
+    //avg
+    let avgFinanceSalaryCell = document.createElement("td");
+    avgFinanceSalaryCell.textContent= avgFinanceSalary;
+    financeCell.appendChild(avgFinanceSalaryCell);
+    //salary
+    let totalMarketingSalaryCell = document.createElement("td");
+    totalMarketingSalaryCell.textContent= totalMarketingSalary;
+    marketingCell.appendChild(totalMarketingSalaryCell);
+    //avg
+    let avgMarketingSalaryCell = document.createElement("td");
+    avgMarketingSalaryCell.textContent= avgMarketingSalary;
+    marketingCell.appendChild(avgMarketingSalaryCell);    
+    //salary
+    let totalDevelopmentSalaryCell = document.createElement("td");
+    totalDevelopmentSalaryCell.textContent= totalDevelopmentSalary;
+    developmentCell.appendChild(totalDevelopmentSalaryCell);
+    //avg
+    let avgDevelopmentSalaryCell = document.createElement("td");
+    avgDevelopmentSalaryCell.textContent= avgDevelopmentSalary;
+    developmentCell.appendChild(avgDevelopmentSalaryCell);
+
+    let totalCell = document.createElement("tr");
+    let totaltdCell = document.createElement("td");    
+    totaltdCell.textContent= "Total" ;
+    totalCell.appendChild(totaltdCell);
+    // # of Employee
+    let numOfEmployeeCell = document.createElement("td");
+    numOfEmployeeCell.textContent= employees.length;
+    totalCell.appendChild(numOfEmployeeCell);
+    //total salary
+    let totalSalaryCell = document.createElement("td");
+    totalSalaryCell.textContent= sumSalary;
+    totalCell.appendChild(totalSalaryCell);
+    // total of avg salary
+    let sumAVGSalary =  avgAdminSalary + avgFinanceSalary + avgMarketingSalary + avgDevelopmentSalary;
+    let totalAVGSalaryCell = document.createElement("td");
+    totalAVGSalaryCell.textContent= sumAVGSalary;
+    totalCell.appendChild(totalAVGSalaryCell);
+    table.appendChild(totalCell);
+
+    // let totalSalaryCell = document.createElement("td");
+    // totalSalaryCell.textContent = this.salary;
+    // tr.appendChild(totalSalaryCell);
+
+    // let avgSalaryCell = document.createElement("td");
+    // avgSalaryCell.textContent = this.salary;
+    // tr.appendChild(avgSalaryCell);
+};
 renderBody();
